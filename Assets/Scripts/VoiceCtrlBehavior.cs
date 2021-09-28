@@ -20,7 +20,9 @@ public class VoiceCtrlBehavior : MonoBehaviour
     void Start()
     {
         //TO DETECT WORDS WITH MICROPHONE - add words to dic 
-        actions.Add("Move Up", MoveUp);
+        actions.Add("Eat Ass", MoveUp);
+        actions.Add("Down", MoveDown);
+
         // now you have to set all these actions as an array and sees if wat u said is here
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
@@ -36,7 +38,12 @@ public class VoiceCtrlBehavior : MonoBehaviour
     private void MoveUp()
     {
         // do the thing
-        transform.Translate(0, 1, 0);
+        transform.Translate(0, 2, 0);
+    }
+    private void MoveDown()
+    {
+        // do the thing
+        transform.Translate(0, -2, 0);
     }
     private void RecognizedSpeech(PhraseRecognizedEventArgs speech)
     {
