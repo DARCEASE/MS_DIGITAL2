@@ -5,7 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 
-//PURPOSE: Have an obj respond to voice commands 
+//PURPOSE: Have an obj respond to voice commands + properties of this boulder
+
 //USAGE: put this on the object you want to manipulate with ur voice 
 public class VoiceCtrlBehavior : MonoBehaviour
 {
@@ -37,6 +38,13 @@ public class VoiceCtrlBehavior : MonoBehaviour
     void Update()
     {
 
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "bird")
+        { 
+            //restart the scene and the player gets no points 
+        }
     }
     private void MoveUp()
     {
