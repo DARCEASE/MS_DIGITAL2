@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
+using UnityEngine.SceneManagement;
 
 //PURPOSE: Have an obj respond to voice commands + properties of this boulder
 
-//USAGE: put this on the object you want to manipulate with ur voice 
+//USAGE: put this on the object you want to manipulate with ur voice // aka player
 public class VoiceCtrlBehavior : MonoBehaviour
 {
     private KeywordRecognizer keywordRecognizer; //component doing all da work
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
     //insert items youd want to mess with so probably like these below
-    public GameObject player1;
+    public GameObject bird; // to detect collisions
     public GameObject player2;
 
     // Start is called before the first frame update
@@ -42,8 +43,14 @@ public class VoiceCtrlBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "bird")
-        { 
+        {
+            Destroy(bird);
+            SceneManager.LoadScene("GameScene");
             //restart the scene and the player gets no points 
+        }
+        if (collision.gameObject.tag == "target")
+        {
+            Debug.Log("PLEASE FOR THE LOVE OF GOD DETECT THIS");
         }
     }
     private void MoveUp()
@@ -76,5 +83,10 @@ public class VoiceCtrlBehavior : MonoBehaviour
         Debug.Log(speech.text); // see what keyword it is 
         actions[speech.text].Invoke(); // then it will correlate to the called action
     }
+     
+    
+    
+       
+    
 
 }
